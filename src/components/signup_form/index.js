@@ -1,14 +1,26 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { signUp } from '../../utilities/user-functions';
 
 const SignUpForm = () => {
+  const [disable, setDisable] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     password2: '',
   });
+
+  useEffect(() => {
+    setDisable(
+      formData.name &&
+        formData.email &&
+        formData.password.length > 5 &&
+        formData.password2.length > 5
+        ? false
+        : true
+    );
+  }, [formData]);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,10 +36,9 @@ const SignUpForm = () => {
     } else {
       await signUp(formData);
     }
-    console.log(formData);
   };
 
-  const { name, email, password, password2 } = formData;
+  const {password, password2 } = formData;
   return (
     <>
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -63,7 +74,9 @@ const SignUpForm = () => {
           onChange={(e) => handleChange(e)}
           required
         />
-        <button type='submit'>Sign Up</button>
+        <button type='submit' disabled={disable}>
+          Sign Up
+        </button>
       </form>
     </>
   );

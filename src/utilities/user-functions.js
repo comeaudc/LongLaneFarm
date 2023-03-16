@@ -6,7 +6,6 @@ export const signUp = async (formData) => {
     url: '/api/users/register',
     data: formData,
   });
-  console.log(res);
   return res;
 };
 
@@ -16,13 +15,21 @@ export const login = async (formData) => {
     url: '/api/users/login',
     data: formData,
   });
+  return res;
+};
+
+export const logout = async () => {
+  let res = await axios({
+    method: 'POST',
+    url: '/api/users/logout',
+  });
   console.log(res);
   return res;
 };
 
 export const getUserFromSession = async () => {
   let res = await axios('/api/users/session-info');
-  console.log(res);
+
   if (res.data.session.passport) {
     let user = res.data.session.passport.user;
     return user;

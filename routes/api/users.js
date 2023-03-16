@@ -68,7 +68,7 @@ router.put('/login', async (req, res, next) => {
         });
       });
     }
-  })(req, req, next);
+  })(req, res, next);
 });
 
 // @route:   POST api/users/logout

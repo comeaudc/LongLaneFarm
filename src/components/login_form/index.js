@@ -1,12 +1,20 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { getUserFromSession, login } from '../../utilities/user-functions';
+import { AppContext } from '../../contexts/app_context';
 
 const LoginForm = () => {
+  let { setUser } = useContext(AppContext);
+
+  const [disable, setDisable] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    setDisable(formData.email && formData.password.length > 5 ? false : true);
+  }, [formData]);
 
   const handleChange = (e) => {
     setFormData({
@@ -19,7 +27,7 @@ const LoginForm = () => {
     e.preventDefault();
     await login(formData);
     let user = await getUserFromSession();
-    console.log(user);
+    setUser(user);
   };
 
   return (
@@ -41,7 +49,9 @@ const LoginForm = () => {
           onChange={(e) => handleChange(e)}
           required
         />
-        <button type='submit'>Log In</button>
+        <button type='submit' disabled={disable}>
+          Log In
+        </button>
       </form>
     </>
   );

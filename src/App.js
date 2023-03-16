@@ -1,16 +1,29 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AuthPage from './pages/auth';
+import { AppContext } from './contexts/app_context';
+import { getUserFromSession } from './utilities/user-functions';
+import LogOut from './components/logout';
 
 function App() {
-  const [user, setUser] = useState(false);
+  let { user, setUser } = useContext(AppContext);
+
+  useEffect(() => {
+    const getSession = async () => {
+      let userResponse = await getUserFromSession();
+      setUser(userResponse);
+    };
+    getSession();
+  }, []);
+
   const returnPage = () => {
     if (true) {
       return (
         <>
           {user ? (
             <div>
+              <LogOut />
               <h1>No Private Routes Yet</h1>
             </div>
           ) : (
