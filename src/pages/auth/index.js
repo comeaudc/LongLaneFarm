@@ -4,7 +4,7 @@ import LoginForm from '../../components/login_form';
 import SignUpForm from '../../components/signup_form';
 
 const AuthPage = () => {
-  const [newUser, setNewUser] = useState(true);
+  const [newUser, setNewUser] = useState(false);
 
   const handleClick = () => {
     setNewUser(newUser ? false : true);
