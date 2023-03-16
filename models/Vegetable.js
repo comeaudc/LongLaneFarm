@@ -14,6 +14,9 @@ const vegetableSchema = new mongoose.Schema(
         unit: {
           type: String,
         },
+        container: {
+          type: String,
+        },
         price: {
           type: Number,
         },

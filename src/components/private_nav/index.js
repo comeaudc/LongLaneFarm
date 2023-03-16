@@ -14,6 +14,9 @@ const PrivateNav = () => {
           <Link className='navItem' to='/'>
             Vegetables
           </Link>
+          <Link className='navItem' to='/create-product'>
+            New product
+          </Link>
           <LogOut />
         </nav>
       ) : (
