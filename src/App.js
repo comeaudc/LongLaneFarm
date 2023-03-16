@@ -26,7 +26,6 @@ function App() {
     const getVeggies = async () => {
       let res = await axios('/api/vegetables');
       setVeggies(res.data);
-      console.log(veggies);
     };
 
     getVeggies();

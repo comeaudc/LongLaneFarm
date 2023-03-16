@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../../contexts/app_context'; 
+import { AppContext } from '../../contexts/app_context';
+import VegetableItem from '../../components/vegetableItem';
 
 const Veggies = () => {
-    let {veggies} = useContext(AppContext)
+  const { veggies } = useContext(AppContext);
 
-  return <div>Veggies</div>;
+  let veggieList = veggies.map((veg) => {
+    return <VegetableItem vegData={veg} key={veg._id} />;
+  });
+  return <div>{veggieList}</div>;
 };
 
 export default Veggies;
