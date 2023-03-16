@@ -9,11 +9,12 @@ const AuthPage = () => {
   const handleClick = () => {
     setNewUser(newUser ? false : true);
   };
-  
+
   return (
     <section>
-      <button onClick={handleClick}>{newUser ? 'Login' : 'Sign Up'}</button>
       {newUser ? <SignUpForm /> : <LoginForm />}
+      <small>{newUser ? 'Already have an account? ' : 'No Account? '}</small>
+      <button onClick={handleClick}>{newUser ? 'Login' : 'Sign Up'}</button>
     </section>
   );
 };

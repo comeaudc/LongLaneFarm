@@ -33,6 +33,7 @@ app.use(passport.initialize());
 
 //Define Routes
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/vegetables', require('./routes/api/vegetables'));
 
 // catch all route
 app.get('/*', (req, res) => {

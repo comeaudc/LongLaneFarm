@@ -4,12 +4,14 @@ import { Routes, Route } from 'react-router-dom';
 import AuthPage from './pages/auth';
 import { AppContext } from './contexts/app_context';
 import { getUserFromSession } from './utilities/user-functions';
-import LogOut from './components/logout';
+import Vegetables from './pages/vegetables/index';
 import Spinner from './components/spinner/index';
+import NavBar from './components/navbar';
+import axios from 'axios';
 
 function App() {
   const [callWasMade, setCallWasMade] = useState(false);
-  let { user, setUser } = useContext(AppContext);
+  let { user, setUser, setVeggies, veggies } = useContext(AppContext);
 
   useEffect(() => {
     const getSession = async () => {
@@ -20,17 +22,30 @@ function App() {
     getSession();
   }, []);
 
+  useEffect(() => {
+    const getVeggies = async () => {
+      let res = await axios('/api/vegetables');
+      setVeggies(res.data);
+      console.log(veggies);
+    };
+
+    getVeggies();
+  }, []);
+
   const returnPage = () => {
     if (callWasMade) {
       return (
         <>
+          <NavBar />
           {user ? (
-            <div>
-              <LogOut />
-              <h1>No Private Routes Yet</h1>
-            </div>
+            <Routes>
+              <Route path={'/vegetables'} element={<Vegetables />} />
+            </Routes>
           ) : (
-            <AuthPage />
+            <Routes>
+              <Route path={'/auth'} element={<AuthPage />} />
+              <Route path={'/'} element={<Vegetables />} />
+            </Routes>
           )}
         </>
       );
