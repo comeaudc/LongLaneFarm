@@ -4,7 +4,6 @@ import { logout } from '../../utilities/user-functions';
 
 const LogOut = () => {
   const { setUser } = useContext(AppContext);
-  const handleLogout = () => {};
 
   const logoutUser = async () => {
     await logout();
