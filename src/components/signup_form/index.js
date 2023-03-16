@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { signUp } from '../../utilities/user-functions';
 
-const SignUpForm = () => {
+const SignUpForm = ({ setNewUser }) => {
   const [disable, setDisable] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -35,10 +35,11 @@ const SignUpForm = () => {
       console.log('PW do not match');
     } else {
       await signUp(formData);
+      setNewUser(false);
     }
   };
 
-  const {password, password2 } = formData;
+  const { password, password2 } = formData;
   return (
     <>
       <form onSubmit={(e) => handleSubmit(e)}>

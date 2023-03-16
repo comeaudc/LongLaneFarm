@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
-import { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { getUserFromSession, login } from '../../utilities/user-functions';
 import { AppContext } from '../../contexts/app_context';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+  const nav = useNavigate();
   let { setUser } = useContext(AppContext);
 
   const [disable, setDisable] = useState(true);
@@ -28,6 +29,7 @@ const LoginForm = () => {
     await login(formData);
     let user = await getUserFromSession();
     setUser(user);
+    nav('/');
   };
 
   return (

@@ -11,7 +11,7 @@ import axios from 'axios';
 
 function App() {
   const [callWasMade, setCallWasMade] = useState(false);
-  let { user, setUser, setVeggies, veggies } = useContext(AppContext);
+  let { user, setUser, setVeggies } = useContext(AppContext);
 
   useEffect(() => {
     const getSession = async () => {
@@ -38,7 +38,7 @@ function App() {
           <NavBar />
           {user ? (
             <Routes>
-              <Route path={'/vegetables'} element={<Vegetables />} />
+              <Route path={'/'} element={<Vegetables />} />
             </Routes>
           ) : (
             <Routes>

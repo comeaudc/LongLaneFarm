@@ -26,7 +26,7 @@ module.exports = async function (passport) {
     )
   );
   passport.serializeUser((user, cb) => {
-    cb(null, { id: user.id, email: user.email });
+    cb(null, { id: user.id, email: user.email, admin: user.isAdmin });
   });
   passport.deserializeUser(async (id, cb) => {
     return cb(null, await User.findById(id).select('-password'));
