@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const nav = useNavigate();
-  let { setUser } = useContext(AppContext);
+  let { setUser, setError } = useContext(AppContext);
 
   const [disable, setDisable] = useState(true);
   const [formData, setFormData] = useState({
@@ -29,32 +29,40 @@ const LoginForm = () => {
     await login(formData);
     let user = await getUserFromSession();
     setUser(user);
-    nav('/');
+    if (user) nav('/');
+    else {
+      setError('Username or Password Inccorrect');
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+    }
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='email'>Email:</label>
-        <input
-          type='email'
-          name='email'
-          value={formData.email}
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <label htmlFor='password'>Password:</label>
-        <input
-          type='password'
-          name='password'
-          value={formData.password}
-          onChange={(e) => handleChange(e)}
-          required
-        />
-        <button type='submit' disabled={disable}>
-          Log In
-        </button>
-      </form>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor='email'>Email:</label>
+          <input
+            type='email'
+            name='email'
+            value={formData.email}
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <label htmlFor='password'>Password:</label>
+          <input
+            type='password'
+            name='password'
+            value={formData.password}
+            onChange={(e) => handleChange(e)}
+            required
+          />
+          <button type='submit' disabled={disable}>
+            Log In
+          </button>
+        </form>
+      </div>
     </>
   );
 };

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './index.css';
 
 const CreateVeggie = () => {
-    const nav = useNavigate()
+  const nav = useNavigate();
   const [disable, setDisable] = useState(true);
   const [unitPricing, setUnitPricing] = useState({
     size: '',
@@ -51,7 +51,7 @@ const CreateVeggie = () => {
       url: '/api/vegetables',
       data: formData,
     });
-    nav('/')
+    nav('/');
   };
 
   return (
@@ -82,7 +82,7 @@ const CreateVeggie = () => {
                 Unit:
               </label>
               <select name='unit' onChange={(e) => handleChange(e)}>
-                <option value='' selected disabled hidden>
+                <option value='' disabled hidden>
                   Choose here
                 </option>
                 <option value='oz'>Ounces</option>
@@ -92,7 +92,7 @@ const CreateVeggie = () => {
                 Container:
               </label>
               <select name='container' onChange={(e) => handleChange(e)}>
-                <option value='' selected disabled hidden>
+                <option value='' disabled hidden>
                   Choose here
                 </option>
                 <option value='box'>Box</option>

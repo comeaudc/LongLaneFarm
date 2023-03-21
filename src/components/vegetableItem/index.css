@@ -1,0 +1,7 @@
+.veg {
+    display: flex;
+    align-items: center;
+}
+.veg>button{
+    height: fit-content;
+}

@@ -5,6 +5,7 @@ export const AppContext = createContext();
 const AppContextProvider = (props) => {
   const [user, setUser] = useState(false);
   const [veggies, setVeggies] = useState([]);
+  const [error, setError] = useState(false);
 
   return (
     <AppContext.Provider
@@ -14,6 +15,9 @@ const AppContextProvider = (props) => {
 
         veggies,
         setVeggies,
+
+        error,
+        setError,
       }}
     >
       {props.children}

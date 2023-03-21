@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import { signUp } from '../../utilities/user-functions';
+import { AppContext } from '../../contexts/app_context';
 
 const SignUpForm = ({ setNewUser }) => {
+  const { setError } = useContext(AppContext);
+
   const [disable, setDisable] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -32,10 +35,24 @@ const SignUpForm = ({ setNewUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('PW do not match');
+      setError('Passwords do not match');
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
     } else {
-      await signUp(formData);
-      setNewUser(false);
+      try {
+        await signUp(formData);
+        setNewUser(false);
+        setError('User Registered');
+        setTimeout(() => {
+          setError(false);
+        }, 3000);
+      } catch (err) {
+        setError('User Exists');
+        setTimeout(() => {
+          setError(false);
+        }, 3000);
+      }
     }
   };
 
