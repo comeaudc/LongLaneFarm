@@ -1,15 +1,19 @@
 import './App.css';
 import { useEffect, useContext, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import AuthPage from './pages/auth';
 import { AppContext } from './contexts/app_context';
-import { getUserFromSession } from './utilities/user-functions';
+import axios from 'axios';
+
+// Pages
+import AuthPage from './pages/auth';
 import Vegetables from './pages/vegetables/index';
 import NewProductPage from './pages/new_product';
+import EditProductPage from './pages/edit_product';
+
+import { getUserFromSession } from './utilities/user-functions';
 import Spinner from './components/spinner/index';
 import NavBar from './components/navbar';
 import { AdminRoutes } from './components/adminRoutes';
-import axios from 'axios';
 
 function App() {
   const [callWasMade, setCallWasMade] = useState(false);
@@ -47,6 +51,7 @@ function App() {
                     path={'/create-product'}
                     element={<NewProductPage />}
                   />
+                  <Route path={'/edit-product/:id'} element={<EditProductPage />} />
                 </Route>
               </Routes>
             ) : (

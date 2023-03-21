@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { AppContext } from '../../contexts/app_context';
 import VegetableItem from '../../components/vegetableItem';
+import axios from 'axios';
 
 const Veggies = () => {
   const { veggies } = useContext(AppContext);

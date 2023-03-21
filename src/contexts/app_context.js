@@ -6,6 +6,7 @@ const AppContextProvider = (props) => {
   const [user, setUser] = useState(false);
   const [veggies, setVeggies] = useState([]);
   const [error, setError] = useState(false);
+  const [selected, setSelected] = useState({});
 
   return (
     <AppContext.Provider
@@ -18,6 +19,9 @@ const AppContextProvider = (props) => {
 
         error,
         setError,
+
+        selected,
+        setSelected
       }}
     >
       {props.children}
